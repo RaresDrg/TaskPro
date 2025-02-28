@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import * as userService from "../servicies/userService";
-import * as utils from "../utils/utils";
-import uploadOnCloud from "../config/config-cloudinary";
-import sendEmail from "../config/config-nodemailer";
-import validateData from "../config/config-validation";
-import { UserType } from "../app.types";
+import * as userService from "../servicies/userService.js";
+import * as utils from "../utils/utils.js";
+import uploadOnCloud from "../config/config-cloudinary.js";
+import sendEmail from "../config/config-nodemailer.js";
+import validateData from "../config/config-validation.js";
+import { UserType } from "../app.types.js";
 
 async function register(req: Request, res: Response, next: NextFunction) {
   try {

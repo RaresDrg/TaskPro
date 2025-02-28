@@ -1,7 +1,7 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import { FilterQuery } from "mongoose";
-import { UserType } from "../app.types";
-import { hash } from "../utils/utils";
+import { UserType } from "../app.types.js";
+import { hash } from "../utils/utils.js";
 
 export async function addUsertoDB(
   data: Pick<UserType, "name" | "email" | "password">

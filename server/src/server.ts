@@ -1,6 +1,6 @@
-import app from "./app";
+import app from "./app.js";
 import mongoose from "mongoose";
-import { PORT, DB_URI } from "./config/config-env";
+import { PORT, DB_URI } from "./config/config-env.js";
 
 (async () => {
   try {

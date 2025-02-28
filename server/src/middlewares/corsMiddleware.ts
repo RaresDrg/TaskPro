@@ -1,5 +1,5 @@
 import cors from "cors";
-import { IN_DEVELOPMENT } from "../config/config-env";
+import { IN_DEVELOPMENT } from "../config/config-env.js";
 
 // todo: test in prod la change password cu token: undefined
 

@@ -2,13 +2,13 @@ import { Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { UserType } from "../app.types";
+import { UserType } from "../app.types.js";
 import {
   SALT_ROUNDS,
   RANDOM_BYTES_LENGTH,
   ACCESS_TOKEN_SECRET,
   IN_DEVELOPMENT,
-} from "../config/config-env";
+} from "../config/config-env.js";
 
 export function sendSuccessResponse(
   res: Response,

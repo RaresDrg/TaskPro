@@ -1,10 +1,10 @@
 import express from "express";
-import userController from "../../controllers/userController";
+import userController from "../../controllers/userController.js";
 import {
   jwtAuthMiddleware,
   profilePhotoMiddleware,
   validateTokenMiddleware,
-} from "../../middlewares";
+} from "../../middlewares/index.js";
 
 const router = express.Router();
 

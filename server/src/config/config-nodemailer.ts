@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
-import { EMAIL, PASSWORD, IN_DEVELOPMENT } from "./config-env";
-import { UserType } from "../app.types";
+import { EMAIL, PASSWORD, IN_DEVELOPMENT } from "./config-env.js";
+import { UserType } from "../app.types.js";
 
 async function sendEmail(
   variant: "customerSupport" | "passwordRecovery",

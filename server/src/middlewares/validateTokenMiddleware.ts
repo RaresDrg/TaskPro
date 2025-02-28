@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { sendFailureResponse } from "../utils/utils";
-import { findUser } from "../servicies/userService";
+import { sendFailureResponse } from "../utils/utils.js";
+import { findUser } from "../servicies/userService.js";
 
 const validateTokenMiddleware = async (
   req: Request,

@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import { CLOUD_NAME, API_KEY, API_SECRET } from "./config-env";
+import { CLOUD_NAME, API_KEY, API_SECRET } from "./config-env.js";
 
 const uploadOnCloud = async (
   file: Express.Multer.File,

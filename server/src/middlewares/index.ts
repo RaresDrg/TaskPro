@@ -1,11 +1,11 @@
-import corsMiddleware from "./corsMiddleware";
-import cookieParserMiddleware from "./cookieParserMiddleware";
-import loggerMiddleware from "./loggerMiddleware";
-import missingRouteMiddleware from "./missingRouteMiddleware";
-import errorMiddleware from "./errorMiddleware";
-import jwtAuthMiddleware from "./jwtAuthMiddleware";
-import { profilePhotoMiddleware } from "./multipartMiddleware";
-import validateTokenMiddleware from "./validateTokenMiddleware";
+import corsMiddleware from "./corsMiddleware.js";
+import cookieParserMiddleware from "./cookieParserMiddleware.js";
+import loggerMiddleware from "./loggerMiddleware.js";
+import missingRouteMiddleware from "./missingRouteMiddleware.js";
+import errorMiddleware from "./errorMiddleware.js";
+import jwtAuthMiddleware from "./jwtAuthMiddleware.js";
+import { profilePhotoMiddleware } from "./multipartMiddleware.js";
+import validateTokenMiddleware from "./validateTokenMiddleware.js";
 
 export {
   corsMiddleware,

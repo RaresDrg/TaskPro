@@ -1,12 +1,12 @@
 import express from "express";
-import { userRouter } from "./routes/api/index";
+import { userRouter } from "./routes/api/index.js";
 import {
   corsMiddleware,
   cookieParserMiddleware,
   loggerMiddleware,
   missingRouteMiddleware,
   errorMiddleware,
-} from "./middlewares/index";
+} from "./middlewares/index.js";
 
 const app = express();
 

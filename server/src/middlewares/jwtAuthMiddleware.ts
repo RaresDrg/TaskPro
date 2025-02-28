@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import { Strategy } from "passport-jwt";
-import { findUser, updateUser } from "../servicies/userService";
-import * as utils from "../utils/utils";
-import { ACCESS_TOKEN_SECRET } from "../config/config-env";
-import { UserType } from "../app.types";
+import { findUser, updateUser } from "../servicies/userService.js";
+import * as utils from "../utils/utils.js";
+import { ACCESS_TOKEN_SECRET } from "../config/config-env.js";
+import { UserType } from "../app.types.js";
 
 const opts = {
   jwtFromRequest: (req: Request) => req?.signedCookies?.accessToken ?? null,

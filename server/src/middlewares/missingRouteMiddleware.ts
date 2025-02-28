@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { sendFailureResponse } from "../utils/utils";
+import { sendFailureResponse } from "../utils/utils.js";
 
 const missingRouteMiddleware = (
   req: Request,
