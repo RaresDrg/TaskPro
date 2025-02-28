@@ -28,7 +28,7 @@ const ResetPasswordForm = ({ className: styles, validationToken }: Props) => {
   const handleSubmit = (values: Values, formikBag: FormikHelpers<Values>) => {
     setIsLoading(true);
 
-    dispatch(changePassword({ validationToken, newPassword: values.password }))
+    dispatch(changePassword({ validationToken, password: values.password }))
       .unwrap()
       .then((value) => notify.success(value.message))
       .catch((error) => {

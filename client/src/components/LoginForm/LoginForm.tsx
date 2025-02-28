@@ -15,29 +15,26 @@ const LoginForm = ({ className: styles }: Props) => {
   const dispatch = useAppDispatch();
   const { openModal } = useModals();
 
-  const initialValues = { email: "", password: "" };
+  const initialValues = { email: "", loginPassword: "" };
   type Values = typeof initialValues;
 
   const validationSchema = getValidationSchema(["email", "loginPassword"]);
 
   const handleSubmit = (values: Values, formikBag: FormikHelpers<Values>) => {
-    const { email, password } = values;
+    const { email, loginPassword } = values;
 
-    dispatch(login({ email, password }))
+    dispatch(login({ email, loginPassword }))
       .unwrap()
       .then((value) => notify.success(`Welcome, ${value.data.user.name} !`))
       .catch((error) => {
         notify.error(error);
 
-        if (
-          error?.response?.data?.message ===
-          "There is no account associated with this email address"
-        ) {
-          formikBag.setFieldError("email", "Invalid email address");
+        if (error?.status === 404) {
+          return formikBag.setFieldError("email", "Invalid email address");
         }
 
-        if (error?.response?.data?.message === "Password is wrong") {
-          formikBag.setFieldError("password", "Invalid password");
+        if (error?.status === 400) {
+          return formikBag.setFieldError("loginPassword", "Invalid password");
         }
       })
       .finally(() => formikBag.setSubmitting(false));
@@ -61,11 +58,11 @@ const LoginForm = ({ className: styles }: Props) => {
               isFocused
             />
             <FormPasswordField
-              id="passwordInput"
-              name="password"
+              id="loginPasswordInput"
+              name="loginPassword"
               placeholder="Password"
-              hasErrors={!!(errors.password && touched.password)}
-              values={values.password}
+              hasErrors={!!(errors.loginPassword && touched.loginPassword)}
+              values={values.loginPassword}
             />
             <FormButton
               type="submit"
@@ -74,7 +71,7 @@ const LoginForm = ({ className: styles }: Props) => {
                 !!(
                   isSubmitting ||
                   (errors.email && touched.email) ||
-                  (errors.password && touched.password)
+                  (errors.loginPassword && touched.loginPassword)
                 )
               }
               variant="greenBtn"

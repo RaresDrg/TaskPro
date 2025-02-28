@@ -22,7 +22,7 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   "auth/login",
-  async (userData: { email: string; password: string }, thunkAPI) => {
+  async (userData: { email: string; loginPassword: string }, thunkAPI) => {
     try {
       await delay(2500);
       const response = await apiClient.post("/api/users/login", userData);
@@ -82,13 +82,13 @@ export const updateUser = createAsyncThunk(
 
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
-  async (data: { validationToken: string; newPassword: string }, thunkAPI) => {
-    const { validationToken, newPassword } = data;
+  async (data: { validationToken: string; password: string }, thunkAPI) => {
+    const { validationToken, password } = data;
 
     try {
       const response = await apiClient.patch(
         `/api/users/update-password?validationToken=${validationToken}`,
-        { newPassword }
+        { password }
       );
 
       return response.data;

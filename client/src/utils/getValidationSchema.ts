@@ -37,22 +37,16 @@ const VALIDATIONS_MAP = {
     .max(400, "It must be less than 400 characters long")
     .required("Required *"),
 };
+type ValidationKey = keyof typeof VALIDATIONS_MAP;
 
-type ValidationConfig = keyof typeof VALIDATIONS_MAP;
+export function getValidationSchema(data: ValidationKey[]) {
+  const schema = Yup.object(
+    Object.fromEntries(
+      data
+        .filter((key) => key in VALIDATIONS_MAP)
+        .map((key) => [key, VALIDATIONS_MAP[key]])
+    )
+  );
 
-export function getValidationSchema(config: ValidationConfig[]) {
-  const validationSchema = config.reduce((acc, item) => {
-    if (item === "loginPassword") {
-      acc.password = VALIDATIONS_MAP.loginPassword;
-      return acc;
-    }
-
-    if (VALIDATIONS_MAP[item]) {
-      acc[item] = VALIDATIONS_MAP[item];
-    }
-
-    return acc;
-  }, {} as Record<ValidationConfig, Yup.AnySchema>);
-
-  return Yup.object(validationSchema);
+  return schema;
 }
