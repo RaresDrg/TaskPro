@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import { Strategy } from "passport-google-oauth20";
-import { findUser, addGoogleUserToDB } from "../servicies/userService.js";
-import { handleRedirect } from "../utils/utils.js";
+import * as userService from "../servicies/userService.js";
+import { generateValidationToken } from "../utils/utils.js";
 import {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
@@ -20,7 +20,7 @@ const opts = {
 passport.use(
   new Strategy(opts, async (_, __, profile, done) => {
     try {
-      let user = await findUser({
+      let user = await userService.findUser({
         email: profile.emails?.[0].value,
       });
 
@@ -32,7 +32,7 @@ passport.use(
           profilePhotoUrl: profile?.photos?.[0]?.value ?? null,
         };
 
-        user = await addGoogleUserToDB(newUser);
+        user = await userService.addGoogleUserToDB(newUser);
       }
 
       return done(null, user);
@@ -51,14 +51,20 @@ const googleAuthMiddleware = {
     })(req, res, next);
   },
   handleCallback: (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate("google", { session: false }, (err, user) => {
-      if (err || !user) {
-        handleRedirect(res, "failed");
-        return;
-      }
+    passport.authenticate("google", { session: false }, async (err, user) => {
+      const URL = IN_DEVELOPMENT
+        ? `http://localhost:5173`
+        : `https://taskpro-beryl.vercel.app`;
 
-      req.user = user;
-      next();
+      if (err || !user) {
+        console.error(err);
+        res.redirect(`${URL}?googleAuthFailed=Google authentication failed !`);
+        return;
+      } else {
+        const validationToken = generateValidationToken();
+        await userService.updateUser(user._id, { validationToken });
+        res.redirect(`${URL}?googleAuthSuccess=${validationToken.value}`);
+      }
     })(req, res, next);
   },
 };

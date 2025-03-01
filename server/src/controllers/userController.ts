@@ -190,19 +190,22 @@ async function updateProfile(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function handleGoogleAuth(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+async function getUserData(req: Request, res: Response, next: NextFunction) {
   try {
     const user = req.user as UserType;
     const tokens = utils.generateAuthTokens(user);
 
+    await userService.updateUser(user._id, {
+      validationToken: null,
+      token: tokens.refreshToken,
+    });
+
     utils.sendTokensAsCookies(res, tokens);
-    res.redirect("http://localhost:5173");
+    utils.sendSuccessResponse(res, 200, {
+      data: { user: utils.selectUserProperties(user) },
+    });
   } catch (error) {
-    utils.handleRedirect(res, "failed");
+    next(error);
   }
 }
 
@@ -215,5 +218,5 @@ export default {
   reachSupport,
   updateTheme,
   updateProfile,
-  handleGoogleAuth,
+  getUserData,
 };

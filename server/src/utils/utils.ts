@@ -7,7 +7,6 @@ import {
   SALT_ROUNDS,
   RANDOM_BYTES_LENGTH,
   ACCESS_TOKEN_SECRET,
-  IN_DEVELOPMENT,
 } from "../config/config-env.js";
 
 export function sendSuccessResponse(
@@ -64,7 +63,6 @@ export function generateAuthTokens(user: UserType) {
   return tokens;
 }
 
-// todo: testat cu cookiurile noi : sameSite: none, nu None, => la google auth poate de data asta trimite cookiurile pe client si nu mai am nevoie de inca o cerere
 export function sendTokensAsCookies(
   res: Response,
   tokens: ReturnType<typeof generateAuthTokens>
@@ -86,26 +84,6 @@ export function sendTokensAsCookies(
     maxAge: 24 * 60 * 60 * 1000,
     sameSite: "none",
   });
-}
-
-export function handleRedirect(
-  res: Response,
-  variant: "failed" | "success",
-  validationToken?: string
-) {
-  const BASE_URL = IN_DEVELOPMENT
-    ? `http://localhost:5173`
-    : `https://taskpro-beryl.vercel.app`;
-
-  if (variant === "failed") {
-    const searchParams = `googleAuthFailed=Google authentication failed !`;
-    return res.redirect(`${BASE_URL}?${searchParams}`);
-  }
-
-  if (variant === "success") {
-    const searchParams = `googleAuthSuccess=${validationToken}`;
-    return res.redirect(`${BASE_URL}?${searchParams}`);
-  }
 }
 
 export function selectUserProperties(user: UserType) {

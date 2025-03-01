@@ -29,10 +29,11 @@ router.put(
 );
 
 router.get("/google-auth", googleAuthMiddleware.redirect);
+router.get("/google-auth/callback", googleAuthMiddleware.handleCallback);
 router.get(
-  "/google-auth/callback",
-  googleAuthMiddleware.handleCallback,
-  userController.handleGoogleAuth
+  "/google-auth/getUser",
+  validateTokenMiddleware,
+  userController.getUserData
 );
 
 export default router;
