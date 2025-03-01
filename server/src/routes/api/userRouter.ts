@@ -4,6 +4,7 @@ import {
   jwtAuthMiddleware,
   profilePhotoMiddleware,
   validateTokenMiddleware,
+  googleAuthMiddleware,
 } from "../../middlewares/index.js";
 
 const router = express.Router();
@@ -25,6 +26,13 @@ router.put(
   "/profile",
   [jwtAuthMiddleware, profilePhotoMiddleware],
   userController.updateProfile
+);
+
+router.get("/google-auth", googleAuthMiddleware.redirect);
+router.get(
+  "/google-auth/callback",
+  googleAuthMiddleware.handleCallback,
+  userController.handleGoogleAuth
 );
 
 export default router;

@@ -190,6 +190,22 @@ async function updateProfile(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function handleGoogleAuth(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const user = req.user as UserType;
+    const tokens = utils.generateAuthTokens(user);
+
+    utils.sendTokensAsCookies(res, tokens);
+    res.redirect("http://localhost:5173");
+  } catch (error) {
+    utils.handleRedirect(res, "failed");
+  }
+}
+
 export default {
   register,
   login,
@@ -199,4 +215,5 @@ export default {
   reachSupport,
   updateTheme,
   updateProfile,
+  handleGoogleAuth,
 };
