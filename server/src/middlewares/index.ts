@@ -7,6 +7,7 @@ import jwtAuthMiddleware from "./jwtAuthMiddleware.js";
 import { profilePhotoMiddleware } from "./multipartMiddleware.js";
 import validateTokenMiddleware from "./validateTokenMiddleware.js";
 import googleAuthMiddleware from "./googleAuthMiddleware.js";
+import disableCacheMiddleware from "./disableCacheMiddleware.js";
 
 export {
   corsMiddleware,
@@ -17,5 +18,6 @@ export {
   jwtAuthMiddleware,
   validateTokenMiddleware,
   profilePhotoMiddleware,
+  disableCacheMiddleware,
   googleAuthMiddleware,
 };

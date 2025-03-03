@@ -7,6 +7,7 @@ import {
   missingRouteMiddleware,
   errorMiddleware,
   jwtAuthMiddleware,
+  disableCacheMiddleware,
 } from "./middlewares/index.js";
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(corsMiddleware);
 app.use(express.json());
 app.use(loggerMiddleware);
 app.use(cookieParserMiddleware);
+app.use(disableCacheMiddleware);
 
 app.use("/api/users", userRouter);
 app.use("/api/boards", jwtAuthMiddleware, boardRouter);
