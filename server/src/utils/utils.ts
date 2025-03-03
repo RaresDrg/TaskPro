@@ -2,7 +2,7 @@ import { Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { UserType } from "../app.types.js";
+import { UserType, BackgroundValue } from "../app.types.js";
 import {
   SALT_ROUNDS,
   RANDOM_BYTES_LENGTH,
@@ -94,4 +94,64 @@ export function selectUserProperties(user: UserType) {
     profilePhotoUrl: user.profilePhotoUrl,
     isGoogleUser: user.isGoogleUser,
   };
+}
+
+export function getBoardOptions() {
+  const iconsOptions = [
+    "icon-project",
+    "icon-star",
+    "icon-loading",
+    "icon-puzzlePiece",
+    "icon-container",
+    "icon-lightning",
+    "icon-colors",
+    "icon-hexagon",
+  ];
+
+  const bgOptions = [
+    "bg-default",
+    "bg-1",
+    "bg-2",
+    "bg-3",
+    "bg-4",
+    "bg-5",
+    "bg-6",
+    "bg-7",
+    "bg-8",
+    "bg-9",
+    "bg-10",
+    "bg-11",
+    "bg-12",
+    "bg-13",
+    "bg-14",
+    "bg-15",
+  ];
+
+  const priorityOptions = ["low", "medium", "high", "without"];
+
+  return { iconsOptions, bgOptions, priorityOptions };
+}
+
+export function getBg(bg: BackgroundValue) {
+  if (bg === "bg-default") {
+    return {
+      value: bg,
+      sources: null,
+    };
+  } else {
+    const baseURL =
+      "https://res.cloudinary.com/db73szjbz/image/upload/TaskPro/assets/backgrounds/";
+
+    return {
+      value: bg,
+      sources: {
+        mobile: `${baseURL}/mobile/${bg}`,
+        tablet: `${baseURL}/tablet/${bg}`,
+        desktop: `${baseURL}/desktop/${bg}`,
+        mobile_2x: `${baseURL}/mobile/${bg}-2x`,
+        tablet_2x: `${baseURL}/tablet/${bg}-2x`,
+        desktop_2x: `${baseURL}/desktop/${bg}-2x`,
+      },
+    };
+  }
 }

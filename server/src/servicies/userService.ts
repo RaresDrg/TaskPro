@@ -1,9 +1,9 @@
 import User from "../models/User.js";
-import { FilterQuery } from "mongoose";
 import { UserType } from "../app.types.js";
+import { FilterQuery } from "mongoose";
 import { hash } from "../utils/utils.js";
 
-export async function addUsertoDB(
+export function addUsertoDB(
   data: Pick<UserType, "name" | "email" | "password">
 ) {
   return User.create({

@@ -1,11 +1,12 @@
 import express from "express";
-import { userRouter } from "./routes/api/index.js";
+import { userRouter, boardRouter } from "./routes/api/index.js";
 import {
   corsMiddleware,
   cookieParserMiddleware,
   loggerMiddleware,
   missingRouteMiddleware,
   errorMiddleware,
+  jwtAuthMiddleware,
 } from "./middlewares/index.js";
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(loggerMiddleware);
 app.use(cookieParserMiddleware);
 
 app.use("/api/users", userRouter);
+app.use("/api/boards", jwtAuthMiddleware, boardRouter);
 
 app.use(missingRouteMiddleware);
 app.use(errorMiddleware);
