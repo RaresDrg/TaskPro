@@ -14,8 +14,10 @@ const FormDeadlineField = ({ className, deadline, setFieldValue }: Props) => {
   const [startDate, setStartDate] = useState(deadline ?? new Date());
 
   function handleChange(date: Date) {
-    setStartDate(date);
-    setFieldValue("deadline", date);
+    const formatedData = new Date(date.setHours(0, 0, 0, 0));
+
+    setStartDate(formatedData);
+    setFieldValue("deadline", formatedData);
   }
 
   return (
