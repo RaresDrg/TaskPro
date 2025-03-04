@@ -129,7 +129,7 @@ export type CardValues = Prettify<{
   title: string;
   description: string;
   priority: CardPriority;
-  deadline: Date;
+  deadline: string;
 }>;
 
 export type FormButtonProps = Prettify<{

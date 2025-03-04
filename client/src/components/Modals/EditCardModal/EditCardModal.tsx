@@ -26,7 +26,7 @@ const EditCardModal = ({ className: styles }: Props) => {
     title: card!.title,
     description: card!.description,
     priority: card!.priority,
-    deadline: new Date(card!.deadline),
+    deadline: new Date(card!.deadline).toDateString(),
   };
   const validationSchema = utils.getValidationSchema(["title", "description"]);
 
@@ -105,7 +105,7 @@ const EditCardModal = ({ className: styles }: Props) => {
             <FormPriorityField />
             <FormDeadlineField
               setFieldValue={setFieldValue}
-              deadline={initialValues.deadline}
+              deadline={new Date(initialValues.deadline)}
             />
             <FormButton
               type="submit"

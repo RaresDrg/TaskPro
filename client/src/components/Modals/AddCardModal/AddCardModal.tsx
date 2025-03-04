@@ -27,7 +27,7 @@ const AddCardModal = ({ className: styles }: Props) => {
     title: "",
     description: "",
     priority: CARD_PRIORITIES[0],
-    deadline: new Date(),
+    deadline: new Date().toDateString(),
   };
   const validationSchema = utils.getValidationSchema(["title", "description"]);
 
