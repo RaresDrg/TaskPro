@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useBoards, useAppDispatch } from "../../hooks/hooks";
 import { setColumns } from "../../redux/boards/slice";
 import { updateBoardColumns } from "../../redux/boards/operations";
@@ -6,25 +7,43 @@ import { DropResult } from "@hello-pangea/dnd";
 import { DragDropContext } from "@hello-pangea/dnd";
 import BoardColumn from "../../components/BoardColumn/BoardColumn.styled";
 import AddColumnBtn from "../AddColumnBtn/AddColumnBtn.styled";
+import LoadingSpinner from "../common/LoadingSpinner/LoadingSpinner.styled";
 
 type Props = {
   className?: string;
 };
 
 const BoardColumns = ({ className: styles }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDragDisabled, setIsDragDisabled] = useState(false);
+
   const { board, columns } = useBoards();
   const dispatch = useAppDispatch();
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <div className={styles}>
-        {columns!.map((column) => (
-          <BoardColumn key={column["_id"]} column={column} />
-        ))}
+    <>
+      <DragDropContext
+        onDragStart={() => setIsDragDisabled(true)}
+        onDragEnd={(result) => {
+          handleDragEnd(result);
+          setIsDragDisabled(false);
+        }}
+      >
+        <div className={styles}>
+          {columns!.map((column) => (
+            <BoardColumn
+              key={column["_id"]}
+              column={column}
+              isDragDisabled={isDragDisabled}
+            />
+          ))}
 
-        <AddColumnBtn />
-      </div>
-    </DragDropContext>
+          <AddColumnBtn />
+        </div>
+      </DragDropContext>
+
+      {isLoading && <LoadingSpinner />}
+    </>
   );
 
   function handleDragEnd(result: DropResult) {
@@ -40,6 +59,7 @@ const BoardColumns = ({ className: styles }: Props) => {
     }
 
     const movedCard = columns!
+      .filter((column) => column["_id"] === source.droppableId)
       .flatMap((column) => column.cards)
       .find((card) => card["_id"] === draggableId);
 
@@ -94,8 +114,12 @@ const BoardColumns = ({ className: styles }: Props) => {
       return column;
     });
 
+    setIsLoading(true);
+
     dispatch(setColumns(updatedColumns));
-    dispatch(updateBoardColumns({ boardId: board!["_id"], updatedColumns }));
+    dispatch(
+      updateBoardColumns({ boardId: board!["_id"], updatedColumns })
+    ).finally(() => setIsLoading(false));
   }
 };
 

@@ -12,9 +12,10 @@ import { Column } from "../../App.types";
 type Props = {
   className?: string;
   column: Column;
+  isDragDisabled: boolean;
 };
 
-const BoardColumn = ({ className: styles, column }: Props) => {
+const BoardColumn = ({ className: styles, column, isDragDisabled }: Props) => {
   const { theme } = useAuth();
   const { filter } = useBoards();
   const { openModal } = useModals();
@@ -52,7 +53,12 @@ const BoardColumn = ({ className: styles, column }: Props) => {
 
           <div className="cards-list">
             {cardsList.map((card, index) => (
-              <ColumnCard key={card["_id"]} card={card} index={index} />
+              <ColumnCard
+                key={card["_id"]}
+                card={card}
+                index={index}
+                isDragDisabled={isDragDisabled}
+              />
             ))}
             {provided.placeholder}
           </div>

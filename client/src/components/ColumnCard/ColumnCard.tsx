@@ -12,9 +12,10 @@ type Props = {
   className?: string;
   index: number;
   card: Card;
+  isDragDisabled: boolean;
 };
 
-const ColumnCard = ({ className: styles, card, index }: Props) => {
+const ColumnCard = ({ className, card, index, isDragDisabled }: Props) => {
   const dispatch = useAppDispatch();
   const { openModal } = useModals();
 
@@ -25,10 +26,14 @@ const ColumnCard = ({ className: styles, card, index }: Props) => {
   const overdue = new Date(today).getTime() > new Date(deadline).getTime();
 
   return (
-    <Draggable draggableId={card["_id"]} index={index}>
+    <Draggable
+      draggableId={card["_id"]}
+      index={index}
+      isDragDisabled={isDragDisabled}
+    >
       {(provided) => (
         <div
-          className={styles}
+          className={className}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
