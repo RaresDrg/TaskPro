@@ -1,5 +1,6 @@
 import express from "express";
 import { userRouter, boardRouter } from "./routes/api/index.js";
+import { serveSwagger, setupSwagger } from "./middlewares/swaggerMiddleware.js";
 import {
   corsMiddleware,
   cookieParserMiddleware,
@@ -18,6 +19,7 @@ app.use(loggerMiddleware);
 app.use(cookieParserMiddleware);
 app.use(disableCacheMiddleware);
 
+app.use("/api-docs", serveSwagger, setupSwagger);
 app.use("/api/users", userRouter);
 app.use("/api/boards", jwtAuthMiddleware, boardRouter);
 
