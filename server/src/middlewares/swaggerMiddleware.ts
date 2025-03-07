@@ -2,9 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
-import { getBoardOptions } from "../utils/utils";
+import { fileURLToPath } from "url";
+import { getBoardOptions } from "../utils/utils.js";
 
 const { bgOptions, iconsOptions, priorityOptions } = getBoardOptions();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const apiDocsDir = path.join(__dirname, "..", "routes", "swaggerDocs");
 
 const swaggerSpec = swaggerJsdoc({
   definition: {
@@ -163,7 +168,7 @@ const swaggerSpec = swaggerJsdoc({
       },
     },
   },
-  apis: [`${path.join(process.cwd(), "src", "routes", "swaggerDocs")}/*.ts`],
+  apis: [`${apiDocsDir}/*.js`],
 });
 
 const serveSwagger = swaggerUi.serve;
