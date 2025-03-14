@@ -29,7 +29,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.1",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "z-schema": "^6.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

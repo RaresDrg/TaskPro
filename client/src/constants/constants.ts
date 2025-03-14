@@ -52,7 +52,7 @@ export const CARD_PRIORITIES: readonly CardPriority[] = [
 const inProduction: boolean = true;
 
 export const API_BASE_URL = inProduction
-  ? "https://taskpro-server-delta.vercel.app"
+  ? "https://taskproserver.vercel.app"
   : "http://localhost:3000";
 
 export const GOOGLE_AUTH_URL = `${API_BASE_URL}/api/users/google-auth`;

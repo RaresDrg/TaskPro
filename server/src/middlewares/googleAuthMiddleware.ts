@@ -14,7 +14,7 @@ const opts = {
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: IN_DEVELOPMENT
     ? "http://localhost:3000/api/users/google-auth/callback"
-    : "https://taskpro-server-delta.vercel.app/api/users/google-auth/callback",
+    : "https://taskproserver.vercel.app/api/users/google-auth/callback",
 };
 
 passport.use(
