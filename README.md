@@ -18,7 +18,7 @@
   <img width="10" />
   <a href="https://expressjs.com/"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg" height="35" alt="express logo"  /></a>
   <img width="10" />
-  <a href="https://www.mongodb.com/"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" height="35" alt="mongodb logo"  />
+  <a href="https://www.mongodb.com/"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" height="35" alt="mongodb logo"  /></a>
   <img width="10" />
   <a href="https://vite.dev/"><img src="https://skillicons.dev/icons?i=vite" height="35" alt="vite logo"  /></a>
   <img width="10" />
