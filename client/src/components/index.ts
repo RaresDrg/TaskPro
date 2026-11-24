@@ -1,0 +1,16 @@
+export { default as AddColumnBtn } from "./AddColumnBtn/AddColumnBtn.styled";
+export { default as AuthGroup } from "./AuthGroup/AuthGroup.styled";
+export { default as BoardContent } from "./BoardContent/BoardContent.styled";
+export { default as BoardsList } from "./BoardsList/BoardsList.styled";
+export { default as BurgerMenuBtn } from "./BurgerMenuBtn/BurgerMenuBtn.styled";
+export { default as CardsList } from "./CardsList/CardsList.styled";
+export { default as ColumnsList } from "./ColumnsList/ColumnsList.styled";
+export { default as FilterBtn } from "./FilterBtn/FilterBtn.styled";
+export { default as GlobalUI } from "./GlobalUI/GlobalUI";
+export { default as Header } from "./Header/Header.styled";
+export { default as LogoutBtn } from "./LogoutBtn/LogoutBtn.styled";
+export { default as MyBoards } from "./MyBoards/MyBoards.styled";
+export { default as SharedLayout } from "./SharedLayout/SharedLayout";
+export { default as SupportCard } from "./SupportCard/SupportCard.styled";
+export { default as ThemeDropdown } from "./ThemeDropdown/ThemeDropdown.styled";
+export { default as UserInfo } from "./UserInfo/UserInfo.styled";

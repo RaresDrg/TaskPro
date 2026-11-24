@@ -1,0 +1,31 @@
+import axios from "axios";
+import { forceLogout } from "../utils/forceLogout";
+
+const IN_DEVELOPMENT = import.meta.env.DEV;
+
+const apiClient = axios.create({
+  baseURL: IN_DEVELOPMENT ? "http://localhost:3000/api" : "/api",
+  withCredentials: IN_DEVELOPMENT,
+});
+
+apiClient.interceptors.request.use((config) => {
+  const sessionId = sessionStorage.getItem("sessionId");
+  if (sessionId) config.headers.Authorization = `Bearer ${sessionId}`;
+  return config;
+});
+
+apiClient.interceptors.response.use(
+  (response) => {
+    const sessionId = response.headers["session-id"];
+    if (sessionId) sessionStorage.setItem("sessionId", sessionId);
+    return response;
+  },
+  (error) => {
+    if (error.status === 401 && !error.config?.url?.includes("auth/logout")) {
+      forceLogout();
+    }
+    return Promise.reject(error);
+  },
+);
+
+export default apiClient;

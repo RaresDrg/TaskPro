@@ -1,0 +1,57 @@
+{
+  "name": "taskpro-api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Backend API for TaskPro",
+  "author": "Rares Dragan",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node dist/server.js",
+    "dev": "cross-env NODE_ENV=development tsx watch --inspect src/server.ts",
+    "tscheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "format": "prettier --write src",
+    "create-env": "(echo CLIENT_URL=&& echo SERVER_URL=&& echo DB_URI=&& echo GOOGLE_CLIENT_ID=&& echo GOOGLE_CLIENT_SECRET=&& echo SALT_ROUNDS=&& echo RANDOM_BYTES_LENGTH=&& echo COOKIE_PARSER_SECRET=&& echo BREVO_API_KEY=&& echo CLOUDINARY_URL=) > .env"
+  },
+  "dependencies": {
+    "@getbrevo/brevo": "^6.2.0",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.11.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "cross-env": "^10.1.0",
+    "dotenv": "^18.0.8",
+    "env-var": "^7.5.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "joi": "^18.2.9",
+    "mongoose": "^9.11.2",
+    "morgan": "^1.12.1",
+    "multer": "^2.4.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.3.0",
+    "@types/node": "^24.19.2",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.17",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.2"
+  }
+}

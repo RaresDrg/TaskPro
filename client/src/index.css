@@ -1,0 +1,251 @@
+@import "modern-normalize";
+@import "@fontsource/poppins/latin-400.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-600.css";
+@import "@fontsource/poppins/latin-700.css";
+
+:root {
+  --font-family: Poppins, Arial, Helvetica, sans-serif;
+  --layout-min-width: 320px;
+  --transition: all 0.35s ease-in-out;
+  --text-color-dark: #161616;
+  --text-color-light: #ffffff;
+  --green-color: #bedbb0;
+  --green-color-active: #9dc888;
+  --violet-color: #b8bcfd;
+  --violet-color-active: #5255bc;
+  --error-color: #dc3545;
+  --priority-without-color: #cecece;
+  --priority-low-color: #bedbb0;
+  --priority-medium-color: #8fa1d0;
+  --priority-high-color: #e09cb5;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family);
+  font-size: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background: transparent;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+  resize: none;
+}
+
+#root {
+  display: grid;
+  height: 100dvh;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+#root:has(> header):has(> section):not(:has(> aside)) {
+  grid-template-rows: auto 1fr;
+}
+
+#root:has(> aside):has(> header):has(> section) {
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto minmax(min-content, 1fr);
+
+  & {
+    > aside {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    > header {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    > section {
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
+}
+
+.error {
+  position: absolute;
+  top: calc(100% + 2px);
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--error-color);
+  font-style: italic;
+  animation: fadeIn 0.35s ease-in-out both;
+}
+
+.error::before {
+  content: "╰┈➤" / "";
+  margin-right: 3px;
+  font-style: normal;
+  color: #808080;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseSmooth {
+  0% {
+    transform: scale(1) scaleX(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.03) scaleX(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1) scaleX(1);
+    opacity: 0;
+  }
+}
+
+@keyframes pixelSmoothCircle {
+  0% {
+    opacity: 0;
+    filter: brightness(0.3) contrast(0.2);
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1);
+    clip-path: circle(120% at 50% 50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *:not(.Toastify__progress-bar),
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
