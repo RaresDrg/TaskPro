@@ -1,3 +1,5 @@
+import { DragDropProvider } from "@dnd-kit/react";
+import { useBoardDragAndDrop } from "../../hooks";
 import { FilterBtn, AddColumnBtn, ColumnsList } from "..";
 import { EllipsisTooltip } from "../common";
 import type { Board } from "../../types";
@@ -9,13 +11,18 @@ type Props = {
 
 const BoardContent = ({ className, board }: Props) => {
   const showFilterBtn = board.columns.some((column) => column.cards.length > 0);
+  const dragHandlers = useBoardDragAndDrop(board);
 
   return (
     <div className={className}>
       <EllipsisTooltip tag="h1" text={board.title} className="board-title" />
       {showFilterBtn && <FilterBtn />}
       <div>
-        {board.columns.length > 0 && <ColumnsList columns={board.columns} />}
+        {board.columns.length > 0 && (
+          <DragDropProvider {...dragHandlers}>
+            <ColumnsList columns={board.columns} />
+          </DragDropProvider>
+        )}
         <AddColumnBtn />
       </div>
     </div>

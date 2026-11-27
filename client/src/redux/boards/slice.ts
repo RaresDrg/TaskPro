@@ -23,6 +23,9 @@ const boardsSlice = createSlice({
       if (state.board?.id !== action.payload.id) state.filter = null;
       state.board = action.payload;
     },
+    setColumns(state, action: PayloadAction<Column[]>) {
+      if (state.board) state.board.columns = action.payload;
+    },
     setColumn(state, action: PayloadAction<Column>) {
       state.column = action.payload;
     },

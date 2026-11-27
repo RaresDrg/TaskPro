@@ -3,6 +3,7 @@ export { default as AuthGroup } from "./AuthGroup/AuthGroup.styled";
 export { default as BoardContent } from "./BoardContent/BoardContent.styled";
 export { default as BoardsList } from "./BoardsList/BoardsList.styled";
 export { default as BurgerMenuBtn } from "./BurgerMenuBtn/BurgerMenuBtn.styled";
+export { default as CardItem } from "./CardItem/CardItem.styled";
 export { default as CardsList } from "./CardsList/CardsList.styled";
 export { default as ColumnsList } from "./ColumnsList/ColumnsList.styled";
 export { default as FilterBtn } from "./FilterBtn/FilterBtn.styled";

@@ -53,7 +53,7 @@ const ColumnsList = ({ className, columns }: Props) => {
                 </button>
               </div>
             </div>
-            {cards.length > 0 && <CardsList cards={cards} />}
+            <CardsList cards={cards} columnId={column.id} />
             <FormButton
               className="add-card-btn"
               type="button"

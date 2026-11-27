@@ -44,5 +44,10 @@ router.delete(
   authSessionMiddleware,
   boardController.deleteCard,
 );
+router.patch(
+  "/:boardId/cards/:cardId/move",
+  authSessionMiddleware,
+  boardController.moveCard,
+);
 
 export default router;

@@ -4,6 +4,7 @@ export const {
   resetSlice,
   setBoardsList,
   setBoard,
+  setColumns,
   setColumn,
   setCard,
   setFilter,

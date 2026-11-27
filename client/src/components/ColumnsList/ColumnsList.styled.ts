@@ -11,7 +11,6 @@ const StyledColumnsList = styled(ColumnsList)`
       width: 348px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
 
       & {
         .heading {

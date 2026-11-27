@@ -7,6 +7,11 @@ type ColumnData = Pick<Column, "title">;
 type ColumnID = Column["id"];
 type CardData = Pick<Card, "title" | "description" | "priority" | "deadline">;
 type CardID = Card["id"];
+type MoveCardData = {
+  fromColumnId: ColumnID;
+  toColumnId: ColumnID;
+  toIndex: number;
+};
 
 export async function addBoard(data: BoardData) {
   const res = await apiClient.post("/boards", data);
@@ -87,6 +92,18 @@ export async function deleteCard(
 ) {
   const res = await apiClient.delete(
     `/boards/${boardID}/columns/${columnID}/cards/${cardID}`,
+  );
+  return res.data;
+}
+
+export async function moveCard(
+  boardID: BoardID,
+  cardID: CardID,
+  data: MoveCardData,
+) {
+  const res = await apiClient.patch(
+    `/boards/${boardID}/cards/${cardID}/move`,
+    data,
   );
   return res.data;
 }

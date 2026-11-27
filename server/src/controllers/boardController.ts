@@ -348,3 +348,57 @@ export const deleteCard: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const moveCard: RequestHandler = async (req, res, next) => {
+  try {
+    const { boardId, cardId } = req.params;
+    const { fromColumnId, toColumnId, toIndex } = req.body;
+    validateData({ boardId, cardId, fromColumnId, toColumnId, toIndex });
+
+    const query = {
+      owner: req.user!._id,
+      _id: new Types.ObjectId(boardId as string),
+    };
+
+    const board = await boardService.findBoard(query);
+    if (!board) throw createError("NotFoundError", "Board not found");
+
+    const fromColumn = board.columns.find((item) =>
+      item._id.equals(fromColumnId),
+    );
+    if (!fromColumn)
+      throw createError("NotFoundError", "Source column not found");
+
+    const toColumn = board.columns.find((item) => item._id.equals(toColumnId));
+    if (!toColumn)
+      throw createError("NotFoundError", "Target column not found");
+
+    const fromIndex = fromColumn.cards.findIndex((item) =>
+      item._id.equals(cardId as string),
+    );
+    if (fromIndex === -1) throw createError("NotFoundError", "Card not found");
+
+    const [movedCard] = fromColumn.cards.splice(fromIndex, 1);
+
+    if (
+      fromColumnId !== toColumnId &&
+      toColumn.cards.some((item) => item.title === movedCard.title)
+    ) {
+      throw createError(
+        "ConflictError",
+        "A card with the same title already exists in the target column",
+      );
+    }
+
+    toColumn.cards.splice(toIndex, 0, movedCard);
+
+    const updatedBoard = await boardService.updateBoard(query, {
+      columns: board.columns,
+    });
+    if (!updatedBoard) throw createError("NotFoundError", "Board not found");
+
+    sendSuccessResponse(res, 200, { message: "Card moved successfully" });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -1,4 +1,5 @@
 export { default as useAppDispatch } from "./useAppDispatch";
+export { default as useBoardDragAndDrop } from "./useBoardDragAndDrop";
 export { default as useGoogleAuth } from "./useGoogleAuth";
 export { default as useLoadBoard } from "./useLoadBoard";
 export { default as useLoadBoards } from "./useLoadBoards";

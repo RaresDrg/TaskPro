@@ -196,6 +196,44 @@ const VALIDATIONS_MAP = {
       "id.format": `{#label} has an invalid format — it must be a 24-character hexadecimal string`,
       "any.required": "{#label} is required",
     }),
+  fromColumnId: Joi.string()
+    .custom((value, helpers) => {
+      if (!Types.ObjectId.isValid(value)) return helpers.error("id.format");
+      return value;
+    })
+    .required()
+    .label("Source Column Id")
+    .messages({
+      "string.base": "{#label} must be a string",
+      "string.empty": "{#label} must not be empty",
+      "id.format": `{#label} has an invalid format — it must be a 24-character hexadecimal string`,
+      "any.required": "{#label} is required",
+    }),
+  toColumnId: Joi.string()
+    .custom((value, helpers) => {
+      if (!Types.ObjectId.isValid(value)) return helpers.error("id.format");
+      return value;
+    })
+    .required()
+    .label("Target Column Id")
+    .messages({
+      "string.base": "{#label} must be a string",
+      "string.empty": "{#label} must not be empty",
+      "id.format": `{#label} has an invalid format — it must be a 24-character hexadecimal string`,
+      "any.required": "{#label} is required",
+    }),
+  toIndex: Joi.number()
+    .strict()
+    .integer()
+    .min(0)
+    .required()
+    .label("Card Index")
+    .messages({
+      "number.base": "{#label} must be a number",
+      "number.integer": "{#label} must be an integer",
+      "number.min": "{#label} must be at least {#limit}",
+      "any.required": "{#label} is required",
+    }),
 };
 type ValidationKey = keyof typeof VALIDATIONS_MAP;
 
